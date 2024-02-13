@@ -4,5 +4,7 @@
 # Ignore Gradle build output directory
 build
 
+# Local dirs and files
 .settings
 .project
+**/api_credentials.json
