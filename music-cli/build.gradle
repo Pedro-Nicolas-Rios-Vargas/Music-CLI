@@ -1,0 +1,36 @@
+plugins {
+ 	id 'java'
+ 	id 'application'
+ 	id 'eclipse'
+ }
+ 
+ group = 'com.ordep'
+ version = '0.0.1-SNAPSHOT'
+
+ application {
+    mainClassName = "com.ordep.musicsearch.MusicSearch"
+ }
+ 
+ repositories {
+ 	mavenCentral()
+ }
+ 
+ dependencies {
+    implementation group: 'org.jcommander', name: 'jcommander', version: '1.83'
+
+    implementation group: 'io.github.openfeign', name: 'feign-core', version: '13.2'
+    implementation group: 'io.github.openfeign', name: 'feign-gson', version: '13.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+ }
+ 
+ java {
+ 	sourceCompatibility = '17'
+ 	toolchain {
+ 		languageVersion = JavaLanguageVersion.of(19)
+ 	}
+ }
+ 
+ tasks.named('test') {
+ 	useJUnitPlatform()
+ }
