@@ -9,7 +9,7 @@ Simple CLI app which consumes Spotify API.
 This app works kinda like raw access to Spotify API (so no AWT auth or Oauth,
 just dev credentials) so you have to provide your own Spotify dev credentials
 in way to make it work so for that just put your credentials inside of
-["api_credentials"](./music-cli/src/main/resources/api_credentials.json).
+["music-cli/src/main/resources/api_credentials.json"](https://github.com/Pedro-Nicolas-Rios-Vargas/Music-CLI/commit/dd3ceb8df45cc35c8d90274096d639d0dcc3bd82#diff-7dcd7c6fedaaa005eb8964343622a49331ea690e8ee7892b96fc5478a7118704).
 
 If you don't have a Spotify API credentials just figure it out.
 
