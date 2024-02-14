@@ -46,4 +46,13 @@ public class Credentials {
     public int hashCode() {
         return Objects.hash(grantType, clientId, clientSecret);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Credentials{" +
+                "grant_type=\"%s\"" +
+                ", client_id=\"%s\"" +
+                ", client_secret=\"%s\"" +
+                "}", grantType, clientId, clientSecret);
+    }
 }

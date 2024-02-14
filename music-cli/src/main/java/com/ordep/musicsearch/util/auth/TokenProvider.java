@@ -29,7 +29,7 @@ public class TokenProvider implements Supplier<Token> {
 	@Override
 	public Token get() {
         APIAuth api = APIFunctions.buildAPI(APIAuth.class,
-                "https://api.spotify.com");
+                "https://accounts.spotify.com");
 
         Credentials credentials = getCredentials()
             .orElse(new Credentials("client_credentials",

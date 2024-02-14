@@ -6,7 +6,7 @@ public class Token {
     
     @SerializedName("access_token")
     private String accessToken;
-    @SerializedName("disc_number")
+    @SerializedName("token_type")
     private String tokenType;
     @SerializedName("expires_in")
     private long expiresIn;

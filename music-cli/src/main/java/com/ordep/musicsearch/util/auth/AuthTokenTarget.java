@@ -20,7 +20,7 @@ public class AuthTokenTarget<T> implements Target<T> {
 
 	@Override
 	public Class<T> type() {
-		throw new UnsupportedOperationException("Unimplemented method 'type'");
+        return clazz;
 	}
 
 	@Override
