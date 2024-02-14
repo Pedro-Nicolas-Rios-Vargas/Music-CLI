@@ -53,7 +53,13 @@ public class Artist extends APIObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artist that = (Artist) o;
-        return Objects.equals(followers, that.followers) &&
+        return Objects.equals(getHref(), that.getHref()) &&
+            Objects.equals(getId(), that.getId()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getType(), that.getType()) &&
+            Objects.equals(getUri(), that.getUri()) &&
+            Objects.equals(getExternalUrls(), that.getExternalUrls()) &&
+            Objects.equals(followers, that.followers) &&
             Arrays.equals(genres, that.genres) &&
             Arrays.equals(images, that.images) &&
             Objects.equals(popularity, that.popularity);
@@ -61,18 +67,26 @@ public class Artist extends APIObject {
 
     @Override
     public int hashCode() {
-        return Objects.hash(followers, Arrays.hashCode(genres),
+        return Objects.hash(getHref(), getId(), getName(), getType(), getUri(),
+                getExternalUrls(), followers, Arrays.hashCode(genres),
                 Arrays.hashCode(images), popularity);
     }
 
     @Override
     public String toString() {
         return String.format("Artist{" +
-                "followers=\'%s\'" +
-                ", genres=\'%s\'" +
-                ", images=\'%s\'" +
-                ", popularity=\'%d\'" +
-                "}", followers, Arrays.toString(genres),
+                "\n\t\t\thref=\'%s\'" + 
+                ",\n\t\t\tid=\'%s\'" + 
+                ",\n\t\t\tname=\'%s\'" + 
+                ",\n\t\t\ttype=\'%s\'" + 
+                ",\n\t\t\turi=\'%s\'" + 
+                ",\n\t\t\texternalUrls=\'%s\'" + 
+                "\n\t\t\tfollowers=\'%s\'" +
+                ",\n\t\t\tgenres=\'%s\'" +
+                ",\n\t\t\timages=\'%s\'" +
+                ",\n\t\t\tpopularity=\'%d\'" +
+                "\n\t\t}", getHref(), getId(), getName(), getType(), getUri(),
+            getExternalUrls(), followers, Arrays.toString(genres),
                 Arrays.toString(images), popularity);
     }
 }

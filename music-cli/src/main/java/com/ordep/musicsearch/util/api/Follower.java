@@ -42,8 +42,8 @@ public class Follower {
     @Override
     public String toString() {
         return String.format("Follower{" +
-                "href=\'%s\'" +
-                ", total=\'%d\'" +
-                "}", href, total);
+                "\n\t\t\t\thref=\'%s\'" +
+                ",\n\t\t\t\ttotal=\'%d\'" +
+                "\n\t\t\t}", href, total);
     }
 }

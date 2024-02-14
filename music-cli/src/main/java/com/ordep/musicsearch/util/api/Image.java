@@ -55,9 +55,9 @@ public class Image {
     @Override
     public String toString() {
         return String.format("Image{" +
-                "url=\'%s\'" +
-                ", height=\'%d\'" +
-                ", width=\'%d\'" +
-                "}", url, height, width);
+                "\n\t\t\t\turl=\'%s\'" +
+                ",\n\t\t\t\theight=\'%d\'" +
+                ",\n\t\t\t\twidth=\'%d\'" +
+                "\n\t\t\t}", url, height, width);
     }
 }

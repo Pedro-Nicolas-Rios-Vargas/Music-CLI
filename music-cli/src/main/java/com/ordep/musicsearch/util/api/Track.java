@@ -75,7 +75,7 @@ public class Track extends APIObject {
     private int durationMs;
 	private boolean explicit;
 	@SerializedName("external_ids")
-    private ExternalIds[] externalIds;
+    private ExternalIds externalIds;
 	@SerializedName("is_playable")
     private boolean isPlayable;
 	@SerializedName("linked_from")
@@ -92,7 +92,7 @@ public class Track extends APIObject {
     public Track(String href, String id, String name, String type, String uri,
             ExternalUrls externalUrls, Album album, Artist[] artists,
             String[] availableMarkets, int discNumber, int durationMs,
-            boolean explicit, ExternalIds[] externalIds, boolean isPlayable,
+            boolean explicit, ExternalIds externalIds, boolean isPlayable,
             String linkedFrom, Restriction restrictions, int popularity,
             String previewUrl, int trackNumber, boolean isLocal) {
 
@@ -155,10 +155,10 @@ public class Track extends APIObject {
 		this.explicit = explicit;
 	}
 
-    public ExternalIds[] getExternalIds() {
+    public ExternalIds getExternalIds() {
 		return externalIds;
 	}
-	public void setExternalIds(ExternalIds[] externalIds) {
+	public void setExternalIds(ExternalIds externalIds) {
 		this.externalIds = externalIds;
 	}
 
@@ -216,13 +216,19 @@ public class Track extends APIObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Track that = (Track) o;
-        return Objects.equals(album, that.album) &&
+        return Objects.equals(getHref(), that.getHref()) &&
+            Objects.equals(getId(), that.getId()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getType(), that.getType()) &&
+            Objects.equals(getUri(), that.getUri()) &&
+            Objects.equals(getExternalUrls(), that.getExternalUrls()) &&
+            Objects.equals(album, that.album) &&
             Arrays.equals(artists, that.artists) &&
             Arrays.equals(availableMarkets, that.availableMarkets) &&
             Objects.equals(discNumber, that.discNumber) &&
             Objects.equals(durationMs, that.durationMs) &&
             Objects.equals(explicit, that.explicit) &&
-            Arrays.equals(externalIds, that.externalIds) &&
+            Objects.equals(externalIds, that.externalIds) &&
             Objects.equals(isPlayable, that.isPlayable) &&
             Objects.equals(linkedFrom, that.linkedFrom) &&
             Objects.equals(restrictions, that.restrictions) &&
@@ -234,32 +240,40 @@ public class Track extends APIObject {
 
     @Override
     public int hashCode() {
-        return Objects.hash(album, Arrays.hashCode(artists),
+        return Objects.hash(getHref(), getId(), getName(), getType(), getUri(),
+                getExternalUrls(), album, Arrays.hashCode(artists),
                 Arrays.hashCode(availableMarkets), discNumber, durationMs,
-                explicit, Arrays.hashCode(externalIds), isPlayable, linkedFrom,
+                explicit, externalIds, isPlayable, linkedFrom,
                 restrictions, popularity, previewUrl, trackNumber, isLocal);
     }
 
     @Override
     public String toString() {
         return String.format("Track{" +
-                "album=\'%s\'" + 
-                ", artists=\'%s\'" + 
-                ", availableMarkets=\'%s\'" + 
-                ", discNumber=\'%d\'" + 
-                ", durationMs=\'%d\'" + 
-                ", explicit=\'%b\'" + 
-                ", externalIds=\'%s\'" + 
-                ", isPlayable=\'%b\'" + 
-                ", linkedFrom=\'%s\'" + 
-                ", restrictions=\'%s\'" + 
-                ", popularity=\'%d\'" + 
-                ", previewUrl=\'%s\'" + 
-                ", trackNumber=\'%d\'" + 
-                ", isLocal=\'%b\'" + 
-                "}", album, Arrays.toString(artists),
+                "\n\t\t\thref=\'%s\'" + 
+                ",\n\t\t\tid=\'%s\'" + 
+                ",\n\t\t\tname=\'%s\'" + 
+                ",\n\t\t\ttype=\'%s\'" + 
+                ",\n\t\t\turi=\'%s\'" + 
+                ",\n\t\t\texternalUrls=\'%s\'" + 
+                ",\n\t\t\talbum=\'%s\'" + 
+                ",\n\t\t\tartists=\'%s\'" + 
+                ",\n\t\t\tavailableMarkets=\'%s\'" + 
+                ",\n\t\t\tdiscNumber=\'%d\'" + 
+                ",\n\t\t\tdurationMs=\'%d\'" + 
+                ",\n\t\t\texplicit=\'%b\'" + 
+                ",\n\t\t\texternalIds=\'%s\'" + 
+                ",\n\t\t\tisPlayable=\'%b\'" + 
+                ",\n\t\t\tlinkedFrom=\'%s\'" + 
+                ",\n\t\t\trestrictions=\'%s\'" + 
+                ",\n\t\t\tpopularity=\'%d\'" + 
+                ",\n\t\t\tpreviewUrl=\'%s\'" + 
+                ",\n\t\t\ttrackNumber=\'%d\'" + 
+                ",\n\t\t\tisLocal=\'%b\'" + 
+                "\n\t\t}", getHref(), getId(), getName(), getType(), getUri(),
+            getExternalUrls(), album, Arrays.toString(artists),
                 Arrays.toString(availableMarkets), discNumber, durationMs,
-                explicit, Arrays.toString(externalIds), isPlayable, linkedFrom,
+                explicit, externalIds, isPlayable, linkedFrom,
                 restrictions, popularity, previewUrl, trackNumber, isLocal);
     }
 }

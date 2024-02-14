@@ -35,7 +35,7 @@ public class Restriction {
     @Override
     public String toString() {
         return String.format("Restriction{" +
-                "reason=\'%s\'" +
-                "}", reason);
+                "\n\t\t\t\treason=\'%s\'" +
+                "\n\t\t\t}", reason);
     }
 }

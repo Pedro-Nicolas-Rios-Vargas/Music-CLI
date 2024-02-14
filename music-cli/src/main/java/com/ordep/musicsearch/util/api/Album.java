@@ -114,7 +114,13 @@ public class Album extends APIObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Album that = (Album) o;
-        return Objects.equals(albumType, that.albumType) &&
+        return Objects.equals(getHref(), that.getHref()) &&
+            Objects.equals(getId(), that.getId()) &&
+            Objects.equals(getName(), that.getName()) &&
+            Objects.equals(getType(), that.getType()) &&
+            Objects.equals(getUri(), that.getUri()) &&
+            Objects.equals(getExternalUrls(), that.getExternalUrls()) &&
+            Objects.equals(albumType, that.albumType) &&
             Objects.equals(totalTracks, that.totalTracks) &&
             Arrays.equals(availableMarkets, that.availableMarkets) &&
             Arrays.equals(images, that.images) &&
@@ -126,7 +132,8 @@ public class Album extends APIObject {
 
     @Override
     public int hashCode() {
-        return Objects.hash(albumType, totalTracks,
+        return Objects.hash(getHref(), getId(), getName(), getType(), getUri(),
+                getExternalUrls(), albumType, totalTracks,
                 Arrays.hashCode(availableMarkets), Arrays.hashCode(images),
                 releaseDate, releaseDatePrecision, restrictions,
                 Arrays.hashCode(artists));
@@ -135,16 +142,24 @@ public class Album extends APIObject {
     @Override
     public String toString() {
         return String.format("Album{" +
-                "albumType=\'%s\'" +
-                ", totalTracks=\'%d\'" +
-                ", availableMarkets=\'%s\'" +
-                ", images=\'%s\'" +
-                ", releaseDate=\'%s\'" +
-                ", releaseDatePrecision=\'%s\'" +
-                ", restrictions=\'%s\'" +
-                ", artists=\'%s\'" +
-                "}", albumType, totalTracks, Arrays.toString(availableMarkets),
-                Arrays.toString(images), releaseDate, releaseDatePrecision,
-                restrictions, Arrays.toString(artists));
+                "\n\t\t\thref=\'%s\'" + 
+                ",\n\t\t\tid=\'%s\'" + 
+                ",\n\t\t\tname=\'%s\'" + 
+                ",\n\t\t\ttype=\'%s\'" + 
+                ",\n\t\t\turi=\'%s\'" + 
+                ",\n\t\t\texternalUrls=\'%s\'" + 
+                "\n\t\t\talbumType=\'%s\'" +
+                ",\n\t\t\ttotalTracks=\'%d\'" +
+                ",\n\t\t\tavailableMarkets=\'%s\'" +
+                ",\n\t\t\timages=\'%s\'" +
+                ",\n\t\t\treleaseDate=\'%s\'" +
+                ",\n\t\t\treleaseDatePrecision=\'%s\'" +
+                ",\n\t\t\trestrictions=\'%s\'" +
+                ",\n\t\t\tartists=\'%s\'" +
+                "\n\t\t}", getHref(), getId(), getName(), getType(), getUri(),
+            getExternalUrls(), albumType, totalTracks,
+            Arrays.toString(availableMarkets), Arrays.toString(images),
+            releaseDate, releaseDatePrecision, restrictions,
+            Arrays.toString(artists));
     }
 }
