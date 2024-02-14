@@ -11,7 +11,7 @@ import feign.RequestLine;
 public interface APIAuth {
 
     @RequestLine("POST /api/token")
-    @Body("grant_type={grant_type}%26client_id={client_id}%26client_secret={client_secret}")
+    @Body("grant_type={grant_type}&client_id={client_id}&client_secret={client_secret}")
     Token getToken(
             @Param("grant_type") String grantType,
             @Param("client_id") String clientId,
