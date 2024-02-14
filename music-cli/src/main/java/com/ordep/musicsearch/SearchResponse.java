@@ -1,116 +1,95 @@
 package com.ordep.musicsearch;
 
-import java.util.Arrays;
 import java.util.Objects;
 
-import com.ordep.musicsearch.util.api.APIObject;
+import com.ordep.musicsearch.util.api.Album;
+import com.ordep.musicsearch.util.api.Artist;
+import com.ordep.musicsearch.util.api.ResponseObject;
+import com.ordep.musicsearch.util.api.Track;
 
-public class SearchResponse<T extends APIObject> {
-    private String href;
-    private int limit;
-    private String next;
-    private int offset;
-    private String previous;
-    private int total;
-    private T[] items;
+public class SearchResponse {
 
-    public SearchResponse(String href, int limit, String next, int offset,
-            String previous, int total, T[] items) {
-        this.href = href;
-        this.limit = limit;
-        this.next = next;
-        this.offset = offset;
-        this.previous = previous;
-        this.total = total;
-        this.items = items;
+    ResponseObject<Track> tracks;
+    ResponseObject<Artist> artists;
+    ResponseObject<Album> albums;
+
+    public SearchResponse(ResponseObject<Track> tracks,
+            ResponseObject<Artist> artists,
+            ResponseObject<Album> albums) {
+        this.tracks = tracks;
+        this.artists = artists;
+        this.albums = albums;
     }
 
-	public String getHref() {
-		return href;
+	public ResponseObject<Track> getTracks() {
+		return tracks;
 	}
-	public void setHref(String href) {
-		this.href = href;
+	public ResponseObject<Artist> getArtists() {
+		return artists;
 	}
-	public int getLimit() {
-		return limit;
-	}
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
-	public String getNext() {
-		return next;
-	}
-	public void setNext(String next) {
-		this.next = next;
-	}
-	public int getOffset() {
-		return offset;
-	}
-	public void setOffset(int offset) {
-		this.offset = offset;
-	}
-	public String getPrevious() {
-		return previous;
-	}
-	public void setPrevious(String previous) {
-		this.previous = previous;
-	}
-	public int getTotal() {
-		return total;
-	}
-	public void setTotal(int total) {
-		this.total = total;
-	}
-	public T[] getItems() {
-		return items;
-	}
-	public void setItems(T[] items) {
-		this.items = items;
+	public ResponseObject<Album> getAlbums() {
+		return albums;
 	}
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        // NOTE: Check this Wildcard later, maybe a headache
-        SearchResponse<T> that = cast(SearchResponse.class, o);
-        if (that == null) return false;
-        return Objects.equals(href, that.href) &&
-            Objects.equals(limit, that.limit) &&
-            Objects.equals(next, that.next) &&
-            Objects.equals(offset, that.offset) &&
-            Objects.equals(previous, that.previous) &&
-            Objects.equals(total, that.total) &&
-            Arrays.equals(items, that.items);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        SearchResponse that = (SearchResponse) obj;
+        return Objects.equals(tracks, that.tracks) &&
+            Objects.equals(artists, that.artists) &&
+            Objects.equals(albums, that.albums);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(href, limit, next, offset, previous, total,
-                Arrays.hashCode(items));
+        return Objects.hash(tracks, artists, albums);
     }
 
     @Override
     public String toString() {
+        /*
         return String.format("SearchResponse{" +
-                "href=\'%s\'" +
-                ", limit=\'%d\'" +
-                ", next=\'%s\'" +
-                ", offset=\'%d\'" +
-                ", previous=\'%s\'" +
-                ", total=\'%d\'" +
-                ", items=\'%s\'" +
-                "}", href, limit, next, offset, previous, total, Arrays.toString(items));
+                "\n\ttracks=%s" +
+                ",\n\tartists=%s" +
+                ",\n\talbums=%s" +
+                "}", tracks, artists, albums);
+        */
+        String strTracks = tracks != null ? "\n\ttracks=" + tracks.toString() : "";
+        String strArtists = artists != null ? "\n\tartists=" + artists.toString() : "";
+        String strAlbums = albums != null ? "\n\talbums=" + albums.toString() : "";
+        return String.format("SearchResponse{%s\n}",
+                stringConcatenateWithJoin(strTracks,
+                    strArtists,
+                    strAlbums));
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public SearchResponse<T> cast(Class<? extends SearchResponse> clazz,
-            Object o) {
-        try {
-            return clazz.cast(o);
-        } catch (ClassCastException ccE) {
-            return null;
+    public static String stringConcatenateWithJoin(String... strings) {
+        String res = "";
+        String delimiter = "";
+        int len = strings.length - 1;
+        boolean needsDelimiter = false;
+
+        int i = 0;
+        while (i <= len) {
+            String str = strings[i];
+
+            if (needsDelimiter) {
+                delimiter = ", ";
+                needsDelimiter = false;
+            }
+
+            if (str != null && !str.isEmpty()) {
+                needsDelimiter = true;
+                res += delimiter + str;
+
+                // unnecesary line but added just to define the injection of
+                // delimiter was done
+                delimiter = "";
+            }
+            i++;
         }
-    }
 
+        return res;
+    }
 }
