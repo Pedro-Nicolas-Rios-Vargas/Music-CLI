@@ -37,7 +37,7 @@ public class CLIArguments {
         validateWith = CLILimitsValidator.class,
         description = "Número que limita la cantidad de elementos a buscar"
     )
-    private int limit = 0;
+    private int limit = 50;
 
     @Parameter(
         names = { "--offset", "-o" },
